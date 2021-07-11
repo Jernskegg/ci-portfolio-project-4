@@ -13,15 +13,12 @@ class table(models.Model):
 
 
 class booking(models.Model):
-    times = []
-    open_time = 5
-    close_time = 12
-    book_duration = 2
-    open_close = range(open_time, close_time)
-
-    for i in open_close[0::book_duration]:
-        times.append((time(i+12, 00,), f'{i} PM'))
-
+    times = [
+        (time(17, 00,), '5 PM'),
+        (time(19, 00,), '7 PM'),
+        (time(21, 00,), '9 PM'),
+        (time(23, 00,), '11 PM'),
+    ]
     Bookholder = models.ForeignKey(User, on_delete=models.CASCADE)
     book_table = models.ForeignKey(table, on_delete=models.CASCADE)
     Booked_for = models.CharField(max_length=30)
