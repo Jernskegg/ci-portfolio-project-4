@@ -6,6 +6,7 @@
     font-family: 'Dancing Script', cursive;
 }
 
+/* home.html */
 .bg-image-home {
     position: absolute;
     z-index: -1;
@@ -20,7 +21,13 @@
     background-size: cover;
 }
 
-/* home.html */
-.catchphrase {
-    font-size: 4vw;
+@media screen and (min-width: 500px) {
+    .catchphrase {
+        font-size: 30px;
+    }
+}
+@media screen and (min-width: 500px) {
+        .catchphrase {
+        font-size: 4vw;
+    }
 }
