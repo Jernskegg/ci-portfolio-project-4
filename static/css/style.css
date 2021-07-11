@@ -6,6 +6,21 @@
     font-family: 'Dancing Script', cursive;
 }
 
-.logo {
-    margin-left: 15px;
+.bg-image-home {
+    position: absolute;
+    z-index: -1;
+    top: 50px;
+    bottom: 0;
+    background: url("https://res.cloudinary.com/dwufrz7t6/image/upload/e_blur:256/v1625957347/restaurant.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/* home.html */
+.catchphrase {
+    font-size: 4vw;
 }
