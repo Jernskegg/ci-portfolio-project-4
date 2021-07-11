@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import menu
+from .models import menu, table, booking
 # Create your views here.
 
 
@@ -13,3 +13,13 @@ def get_menu(request):
         'items': menu_items
     }
     return render(request, 'menu/menu.html', context)
+
+
+def get_reservation(request):
+    tables = table.objects.all()
+    times = booking.times
+    context = {
+        'tables': tables,
+        'times': times
+    }
+    return render(request, 'reservation/reservation.html', context)
