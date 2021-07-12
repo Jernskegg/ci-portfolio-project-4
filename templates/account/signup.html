@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<div class="row me-0">
+  <h2></h2>
+  <div class="col-6">
+    <div class="container-fluid bg-image-home">
+    </div>
+  </div>
+  <div class="col-10 ms-5 ms-md-0 col-md-5 bg-light mt-5 p-0">
+    <div class="form-group p-3">
+      <h2>{% trans "Sign Up" %}</h2>
+      <p>{% blocktrans %} Welcome to All Dente Jenskegg.<br>To be able to manage your bookings you have to be signed in.
+        <br> If you have not created an account yet, then please fill in the form{% endblocktrans %}</p>
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        <div class="form-group p-3">
+          {{ form.as_p }}
+        </div>
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button class="btn col-4 btn-warning" type="submit">{% trans "Sign Up" %} &raquo;</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
