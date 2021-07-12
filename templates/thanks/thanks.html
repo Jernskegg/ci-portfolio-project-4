@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="row me-0">
+    <h2>{{ Times.booking_time }}</h2>
+    <div class="col-6 d-sm-none d-md-flex">
+        <div class="container-fluid bg-image-home">
+        </div>
+    </div>
+    <div class="col-10 text-center col-md-5 bg-light mt-5 p-3">
+        <div class="row">
+            <h3> Thank you {{get_form.booked_for|title}}!</h3>
+            <p>you are now booked for table {{get_form.table_number|lower}}</p>
+        </div>
+        <div class="row mt-5">
+            <p>you are welcome {{get_form.booking_date}} at {{get_form.booking_time}}</p>
+            <p>If you want unbook please register with the you email used :</p>
+            <p>{{get_form.booking_email}}</p>
+        </div>
+    </div>
+</div>
+{%endblock%}
