@@ -41,11 +41,33 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
     'restaurant',
 ]
+# Allauth Parameters
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTHENTICATION_BACKENDS = (
+    # used for admin panel login
+    "django.contrib.auth.backends.ModelBackend",
+    # used to be able to log in with email only
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
