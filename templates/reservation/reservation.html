@@ -1,58 +1,56 @@
 {% extends "base/base.html" %}
 
 {% block content %}
+<!-- START OF CONTENT -->
 <div class="row me-0">
     <h2>{{ Times.booking_time }}</h2>
-    <div class="col-6 d-sm-none d-md-flex">
+    <div class="col-6">
         <div class="container-fluid bg-image-home">
         </div>
     </div>
-    <div class="col-10 col-md-5 bg-light mt-5 p-3">
-        <form method="">
-            <div class="form-group">
-                <label for="exampleFormControlInput1">email address</label>
-                <input type="email" class="form-control" id="phonenumber" placeholder="name@email.com" required>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlInput1">phone number <span class="text-muted">(optional)</span></label>
-                <input type="tel" class="form-control" id="phonenumber" pattern="[0-9]{10}" placeholder="0123456789"
+    <div class="col-10 ms-5 ms-md-0 col-md-5 bg-light mt-5 p-0">
+        <form action="{% url 'thanks' %}" method="POST" >
+            {% csrf_token %}
+            <div class="form-group p-3">
+                <label for="email">email address</label>
+                <input type="email" class="form-control" id="email" name="booking_email" placeholder="name@email.com" required>
+            
+                <label for="phonenumber">phone number <span class="text-muted">(optional)</span></label>
+                <input type="tel" class="form-control" id="phonenumber" name="phone_number" pattern="[0-9]{10}" placeholder="0123456789"
                     required>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Name of the booker</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Surname" required>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Time</label>
-                <select class="form-control" id="exampleFormControlSelect1">
+          
+                <label for="name">Name of the booker</label>
+                <input type="text" class="form-control" id="name" name="booked_for" placeholder="Surname" required>
+           
+                <label for="time">Time</label>
+                <select class="form-control" id="time" name="booking_time">
                     <!--Add amounts of tables-->
                     {% for time in times %}
-                    <option>{{ time|slice:"1:" |cut:"('"|cut:"',)" }}</option>
+                    <option value='{{ time|slice:":1"|cut:"(datetime.time("| cut:", 0),)" }}:00'>{{ time|slice:"1:" |cut:"('"|cut:"',)"}}</option>
                     {% endfor %} 
                 </select>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Select table</label>
-                <select class="form-control" id="exampleFormControlSelect1">
+         
+                <label for="table">Select table</label>
+                <select class="form-control" id="table" name="table_number">
                     <!--Add amounts of tables-->
                     {% for table in tables%}
-                    <option>Table {{ table.table_number }} for {{table.table_chairs}} people</option>
+                    <option value="{{ table.table_number}}">Table {{ table.table_number }} for {{table.table_chairs}} people</option>
                     {% endfor %}
                 </select>
+
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" name="booking_date" required>
             </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Date</label>
-                <input type="date" class="form-control" id="exampleFormControlInput1" required>
-            </div>
-            <div class="row mt-5">
+            <div class="row p-4 pt-1">
                 <button class="btn col-4 btn-warning " type="submit">Reserve</button>
                 <p class="col-4">Cancel booking?</p>
             </div>
+            <div class="bg-danger mb-0 text-center">
+                <p class="fs-3 mb-0 px-5">{{ msg }}</p>
+            </div>
         </form>
+
     </div>
 </div>
+<!-- END OF CONTENT -->
 {%endblock%}
