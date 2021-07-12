@@ -39,6 +39,8 @@ Python is an easy and basic programming language, but it is powerful with librar
 
 (Fixed) Style.css isn't working on heroku. Added django url tag for style.css cloudinary, and cloudinary key wasn't correct on heroku. I removed and reapplied the apikey.
 
+(Fixed)font are not imported on heroku. Changed from import on CSS to HTML.
+
 # Deployment
 
 ## via Gitpod
