@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from datetime import time
 # Create your models here.
 
@@ -19,14 +18,16 @@ class booking(models.Model):
         (time(21, 00,), '9 PM'),
         (time(23, 00,), '11 PM'),
     ]
-    Bookholder = models.ForeignKey(User, on_delete=models.CASCADE)
-    book_table = models.ForeignKey(table, on_delete=models.CASCADE)
-    Booked_for = models.CharField(max_length=30)
+    booking_email = models.CharField(default="none", max_length=256)
+    table_number = models.IntegerField(default='0')
+    booked_for = models.CharField(max_length=30)
     booking_date = models.DateField()
     booking_time = models.TimeField(choices=times)
+    phone_number = models.IntegerField(default='0000')
 
     def __str__(self):
-        return f'{self.Bookholder} has booked {self.book_table} for {str(self.booking_time)[:5]} on {self.booking_date}'
+        return f'{self.booking_email} has booked {self.table_number}'\
+               f' for {str(self.booking_time)[:5]} on {self.booking_date}'
 
 
 class menu(models.Model):

@@ -15,11 +15,47 @@ def get_menu(request):
     return render(request, 'menu/menu.html', context)
 
 
-def get_reservation(request):
+def get_reservation(request, msg=""):
     tables = table.objects.all()
     times = booking.times
     context = {
         'tables': tables,
-        'times': times
+        'times': times,
+        'msg': msg,
     }
-    return render(request, 'reservation/reservation.html', context)
+    return render(request, 'reservation/reservation.html',
+                  context)
+
+
+def get_thanks(request):
+    get_form = request.POST
+    fbooking_email = request.POST.get('booking_email')
+    ftable_number = request.POST.get('table_number')
+    fbooked_for = request.POST.get('booked_for')
+    fbooking_date = request.POST.get('booking_date')
+    fbooking_time = request.POST.get('booking_time')
+    fphone_number = request.POST.get('phone_number')
+    booking_msg = booking.objects.all()
+    duplicate = 0
+    for n, i in enumerate(booking_msg):
+        check_one = str(i)[-25:]
+        check_two = f'{ftable_number} for {fbooking_time} on {fbooking_date}'
+        if check_one == check_two:
+            duplicate += 1
+    if duplicate == 0:
+        booking.objects.create(
+            booking_email=fbooking_email,
+            table_number=ftable_number,
+            booked_for=fbooked_for,
+            booking_date=fbooking_date,
+            booking_time=fbooking_time,
+            phone_number=fphone_number,
+        )
+    else:
+        print("Double booking")
+        return get_reservation(request, msg='Table is already booked at\
+                                             the given time, try another one.')
+    context = {
+        'get_form': get_form,
+    }
+    return render(request, 'thanks/thanks.html', context)
