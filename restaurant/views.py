@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import menu, table, booking
-# Create your views here.
+from django.contrib.auth.models import User
+# Create your views here
 
 
 def get_home(request):
@@ -59,3 +60,21 @@ def get_thanks(request):
         'get_form': get_form,
     }
     return render(request, 'thanks/thanks.html', context)
+
+
+def get_myaccount(request):
+    username = 'anon'
+    if request.user.is_authenticated:
+        username = request.user.email
+    filter_me = booking.objects.all()
+    bookings = filter_me.filter(booking_email=username)
+    context = {
+        'bookings': bookings,
+    }
+    return render(request, 'my_account/my_account.html', context)
+
+
+def unbook(request, item_id):
+    item = get_object_or_404(booking, id=item_id)
+    item.delete()
+    return get_myaccount(request)

@@ -33,6 +33,9 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'myaccount' %}">bookings</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-dark" href="{% url 'account_logout' %}">Logout</a>
             </li>
             {% else %}
@@ -54,6 +57,9 @@
                 <a class="dropdown-item text-center text-dark" href="{% url 'menu' %}">menu</a>
             </li>
             {% if user.is_authenticated %}
+            <li>
+                <a class="dropdown-item text-dark" href="{% url 'myaccount' %}">account</a>
+            </li>
             <li>
                 <a class="dropdown-item text-dark" href="{% url 'account_logout' %}">Logout</a>
             </li>

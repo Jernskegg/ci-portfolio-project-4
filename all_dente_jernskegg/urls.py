@@ -16,7 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from restaurant.views import get_home, get_menu, get_reservation, get_thanks
+from restaurant.views import (
+    get_home,
+    get_menu,
+    get_reservation,
+    get_thanks,
+    get_myaccount,
+    unbook,
+)
 
 
 urlpatterns = [
@@ -26,4 +33,6 @@ urlpatterns = [
     path('reservation/', get_reservation, name='reservation'),
     path('thanks/', get_thanks, name='thanks'),
     path('accounts/', include('allauth.urls')),
+    path('myaccount/', get_myaccount, name='myaccount'),
+    path('myaccount/<item_id>', unbook, name='unbook')
 ]

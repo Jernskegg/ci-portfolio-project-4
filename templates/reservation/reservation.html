@@ -13,14 +13,14 @@
             {% csrf_token %}
             <div class="form-group p-3">
                 <label for="email">email address</label>
-                <input type="email" class="form-control" id="email" name="booking_email" placeholder="name@email.com" required>
+                <input type="email" class="form-control" id="email" name="booking_email" placeholder="name@email.com" value="{{ user.email }}" required>
             
                 <label for="phonenumber">phone number <span class="text-muted">(optional)</span></label>
                 <input type="tel" class="form-control" id="phonenumber" name="phone_number" pattern="[0-9]{10}" placeholder="0123456789"
                     required>
           
                 <label for="name">Name of the booker</label>
-                <input type="text" class="form-control" id="name" name="booked_for" placeholder="Surname" required>
+                <input type="text" class="form-control" id="name" name="booked_for" placeholder="Surname" value="{{ user.name }}" required>
            
                 <label for="time">Time</label>
                 <select class="form-control" id="time" name="booking_time">

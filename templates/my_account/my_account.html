@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+{% block content %}
+<div class="row me-0">
+    <hr>
+    <div class="col-6">
+        <div class="container-fluid bg-image-home">
+        </div>
+    </div>
+    <div class="col-10 ms-5 ms-md-0 col-md-5 bg-light mt-5 p-0">
+        <div class="form-group p-3">
+            <h2>Bookings</h2>
+            {% if user.is_authenticated %}
+            <table>
+                {% for booking in bookings%}
+                <tr>
+                    <td>{{ booking }}
+                    <td>
+                    <td>
+                        <a href="/myaccount/{{booking.id}}"><button class="btn btn-warning">unbook</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <p>delete my account</p>
+            {% else %}
+            <h2>You are not signed in. please sign in.</h2>
+            {% endif %}
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
