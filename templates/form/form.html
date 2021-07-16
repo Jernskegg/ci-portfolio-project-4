@@ -1,0 +1,28 @@
+{% block content %}
+
+{% csrf_token %}
+
+{% load myfilters %}
+
+ 
+    {% for field in form %}
+      <div class="row">
+        <div>{{ field.label_tag }} </div>
+        {% if field.widget_type == 'checkbox' %}
+        <div >{{ field|addclass:'form-check-input' }}</div>
+        {% else %}
+        <div >{{ field|addclass:'form-control' }}</div>
+        {% endif %}
+      </div>
+      <div>
+        {{ field.errors }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+      </div class="">
+    {% endfor %}
+  {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+
+{%endblock%}
