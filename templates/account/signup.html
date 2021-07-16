@@ -17,17 +17,12 @@
       <h2>{% trans "Sign Up" %}</h2>
       <p>{% blocktrans %} Welcome to All Dente Jenskegg.<br>To be able to manage your bookings you have to be signed in.
         <br> If you have not created an account yet, then please fill in the form{% endblocktrans %}</p>
-      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-        {% csrf_token %}
-        <div class="form-group p-3">
-          {{ form.as_p }}
-        </div>
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <button class="btn col-4 btn-warning" type="submit">{% trans "Sign Up" %} &raquo;</button>
+      <form id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% include "form/form.html" %}
+        <button class="btn col-4 btn-warning" type="submit">Sign Up</button>
       </form>
     </div>
   </div>
 </div>
 {% endblock %}
+

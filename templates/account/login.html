@@ -1,9 +1,6 @@
 {% extends "base/base.html" %}
+ 
 
-{% load i18n %}
-{% load account socialaccount %}
-
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
 
@@ -17,19 +14,13 @@
   </div>
   <div class="col-10 ms-5 ms-md-0 col-md-5 bg-light mt-5 p-0">
     <div class="form-group p-3">
-      <h2>{% trans "Sign In" %}</h2>
-      <p>{% blocktrans %} Welcome to All Dente Jenskegg.<br>To be able to manage your bookings you have to be signed in. <br> If you have not created an account yet, then please
-        <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+      <h2>Sign in</h2>
+      <p>Welcome to All Dente Jenskegg.<br>To be able to manage your bookings you have to be signed in. <br> If you have not created an account yet, then please
+        <a href="{{ signup_url }}">sign up</a> first.</p>
       <form class="login" method="POST" action="{% url 'account_login' %}">
-        {% csrf_token %}
-        <div class="form-group p-3">
-          {{ form.as_p }}
-        </div>
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <button class="primaryAction btn col-4 btn-warning" type="submit">{% trans "Sign In" %}</button>
-        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+          {% include "form/form.html" %}
+        <button class="primaryAction btn col-4 btn-warning" type="submit">Sign in</button>
+        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?</a>
       </form>
     </div>
   </div>
