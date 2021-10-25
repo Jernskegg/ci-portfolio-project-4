@@ -3,7 +3,6 @@ from .models import booking
 from django.contrib.auth.models import User
 
 
-
 class BookingForm(forms.ModelForm):
     class Meta:
         model = booking
@@ -18,3 +17,13 @@ class BookingForm(forms.ModelForm):
         labels = {
             'phone_number': 'Phone number (Optional)',
         }
+
+
+class AccountForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'email',
+            'first_name',
+            'last_name',
+        ]

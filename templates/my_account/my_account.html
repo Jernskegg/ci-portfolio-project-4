@@ -7,22 +7,28 @@
         </div>
     </div>
     <div class="col-10 ms-5 ms-md-0 col-md-5 bg-light mt-5 p-0">
-        <div class="form-group p-3">
+        <div class="form-group row p-3">
             <h2>Bookings</h2>
             {% if user.is_authenticated %}
-            <table>
-                {% for booking in bookings%}
-                <tr>
-                    <td>{{ booking }}
-                    <td>
-                    <td>
+                <div class="p-1 col-6">
+                    {% for booking in bookings %}
+                    <div class="p-2 m-2 border rounded">
+                        {{ booking }}
+                        <br>
                         <a href="/myaccount/{{booking.id}}"><button class="btn btn-warning">unbook</button></a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-            <br>
-            <p>delete my account</p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            <div class="col-4">
+                <form action="{% url 'myaccount' %}" method="POST">
+                {% csrf_token %}
+                {% include "form/form.html" %}
+                <p>user id : {{user.id}}</p>
+                <button class="btn btn-warning" type="submit">save</button>
+                <button class="btn btn-danger">delete my account</button>
+            </form>
+            </div>
             {% else %}
             <h2>You are not signed in. please sign in.</h2>
             {% endif %}

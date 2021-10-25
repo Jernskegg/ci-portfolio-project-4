@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import menu, booking
 # from django.contrib.auth.models import User
-from .forms import BookingForm
+from .forms import BookingForm, AccountForm
 from datetime import date
 # Create your views here
 
@@ -54,15 +54,27 @@ def get_myaccount(request):
     username = 'anon'
     if request.user.is_authenticated:
         username = request.user.email
+        form = AccountForm(initial={
+                     'email': request.user.email,
+                     'first_name': request.user.first_name,
+                     'last_name': request.user.last_name
+                     })
+    else:
+        form = 'logged out'
     filter_me = booking.objects.all()
     bookings = filter_me.filter(booking_email=username)
     context = {
         'bookings': bookings,
+        'form': form,
     }
     return render(request, 'my_account/my_account.html', context)
 
 
 def unbook(request, item_id):
     item = get_object_or_404(booking, id=item_id)
-    item.delete()
+    print(item)
+    user_check = request.user.email
+    print(user_check)
+    if str(user_check) in str(item):
+        item.delete()
     return get_myaccount(request)

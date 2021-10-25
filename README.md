@@ -3,7 +3,7 @@
 Casper Hille
 
 Full-Stack Development course (5p) | Portfolio project 4 (Python focused project)
-
+# THIS PROJECT IS DISCONTINUED
 ---
 
 # Purpose of the Project
@@ -41,6 +41,7 @@ Python is an easy and basic programming language, but it is powerful with librar
 
 (Fixed)font are not imported on heroku. Changed from import on CSS to HTML.
 
+Unbooking other bookings
 # Deployment
 
 ## via Gitpod
